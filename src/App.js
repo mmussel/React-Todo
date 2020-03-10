@@ -1,30 +1,32 @@
 import React from 'react';
-import styled from 'styled-components';
-import TodoList from '../src/components/TodoList';
-import TodoForm from '../src/components/TodoForm';
-import './components/Todo.css';
+import TodoForm from './components/TodoForm';
+import TodoList from './components/TodoList';
+import './components/Todo.css'
+
 
 const todos = [
   {
-    task: '',
+    name: 'Hit Snooze 100 Times',
     id: 1,
     completed: false
   },
-]
-const Container = styled.div `
-  display: flex;
-  justify-content: center;
-  align-items: center
-`
+  {
+    name: 'Debate Going Back to Bed',
+    id: 2,
+    completed: false
+  },
+  {
+    name: 'Shower',
+    id: 3,
+    completed: false
+  },
+  {
+    name: 'Eat Enough to feed a family of 4',
+    id: 4,
+    completed: false
+  },
 
-const List = styled.div `
-  width: 300px;
-  height: 450px;
-  border: 2px solid black;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-`
+];
 
 class App extends React.Component {
   // you will need a place to store your state in this component.
@@ -33,56 +35,58 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      todos,
-      task: ''
+      todoItem: todos
     };
   }
 
-  addTodo = todoName => {
-    const newTodo = {
-      task: todoName,
+  toggleItem = todosId => {
+    this.setState({
+     
+      todoItem : this.state.todoItem.map(item => {
+      if (item.id === todosId) {
+        return {
+          ...item,
+          completed: !item.completed
+        };
+      } else {
+        return item;
+      }
+    })
+    
+    
+    });
+  };
+  addItem = itemName => {
+    const newItem = {
+      name: itemName,
       id: Date.now(),
       completed: false
     };
     this.setState({
-      todos: [...this.state.todos, newTodo]
+      todoItem: [...this.state.todoItem, newItem]
     });
   };
 
-  clearCompleted = () => {
+  clearItem = completed => {
+    const newListCleared = this.state.todoItem.filter(item => 
+      item.completed === false
+    )
     this.setState({
-      todos: this.state.todos.filter(todo => !todo.completed)
-    })
+      todoItem: newListCleared
+    });
   }
-
-  toggleCompleted = clickedTodoId => {
-    this.setState({
-      todos: this.state.todos.map(todo => {
-        if (todo.id === clickedTodoId) {
-          return {
-            ...todo,
-            completed: !todo.completed,
-          };
-        } else {
-          return todo;
-        }
-      })
-    });
-  };
 
   render() {
     return (
-      <Container>
-        <List>
-          <h2>Definitely should do these things..</h2>
-          <TodoForm addTodo={this.addTodo} />
-          <TodoList
-            todos={this.state.todos}
-            toggleCompleted={this.toggleCompleted}
-            clearCompleted={this.clearCompleted}
-          />
-        </List>
-      </Container>
+      
+      <div className= "App">
+        <div className ="header">
+        <h2>My Boring Todo List</h2>
+        <TodoList addItem={this.addItem}  />
+        </div>
+        <TodoForm todos={this.state.todoItem} toggleItem={this.toggleItem} clearItem={this.clearItem}  />
+       </div>
+    
     );
   }
 }

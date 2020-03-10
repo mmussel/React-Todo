@@ -1,18 +1,46 @@
 // your components will all go in this `component` directory.
 // feel free to change this component.js into TodoList.js
+
+
 import React from 'react';
-import Todo from "./Todo";
+
+class TodoList extends React.Component {
+
+  constructor() {
+    super();
+    this.state = {
+      todoItem: ''
+    };
+  }
+
+  handleChanges = e => {
+    this.setState({
+      todoItem: e.target.value
+    });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.addItem(this.state.todoItem);
+  };
 
 
-const TodoList = props => {
+
+  render() {
     return (
-        <div>
-            {props.todos.map(todo => (
-                <Todo toggleCompleted={props.toggleCompleted} todo={todo} toggleTask={props.toggleTask}/>
-            ))}
-            <button onClick={props.clearCompleted}>Clear Completed</button>
-        </div>
-    )
-};
+      <form onSubmit={this.handleSubmit}>
+        <input
+          type="text"
+          name="item"
+          value={this.state.todoItem}
+          onChange={this.handleChanges}
+        />
+        <button>Add</button>
+
+
+      </form>
+    );
+  }
+}
 
 export default TodoList;
