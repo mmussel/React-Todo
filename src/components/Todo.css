@@ -1,3 +1,64 @@
-.done {
-    text-decoration: line-through;
+body{
+    background-color: ghostwhite;
 }
+
+.App {
+    font-family: sans-serif;
+    text-align: center;
+    padding: 0 36px;
+    max-width: 665px;
+    margin: 0 auto;
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  h1 {
+    text-align: left;
+  }
+  .item-list {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .item {
+    background-color: #e7ba94;
+    width: 45%;
+    text-align: left;
+    margin: 4px 0;
+    padding-left: 8px;
+    cursor: pointer;
+  }
+
+  form {
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+  }
+  form > input {
+    /* background-color: gray; */
+    border: 0;
+    padding: 6px 0;
+    font-size: 1rem;
+    width: 240px;
+    outline: 0;
+    color: white;
+    border-bottom: 1px solid #5e5b5b;
+    margin-right: 8px;
+  }
+  button {
+    background-color: #5a4d4d;
+    border: 1px solid #c5b5b4;
+    color: white;
+    font-size: 16px;
+    padding: 6px 14px;
+  }
+  
+
+  
+  .clear-btn {
+    margin-top: 16px;
+  }
